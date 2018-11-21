@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/Documents/C# Monogame/SpaceShip/SpaceShip/Content/timerFont.spritefont</SourceFile>
+  <SourceTime>2017-11-18T14:07:30+01:00</SourceTime>
+  <DestFile>D:/Documents/C# Monogame/SpaceShip/SpaceShip/Content/bin/Windows/Content/timerFont.xnb</DestFile>
+  <DestTime>2018-10-23T18:24:06.9071141+02:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2018-10-08T15:37:24+02:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2018-10-08T15:37:24+02:00</ProcessorTime>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

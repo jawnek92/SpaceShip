@@ -1,0 +1,1 @@
+Initializing repo, SpaceShip game, base for project.
