@@ -43,7 +43,8 @@
   <ItemGroup>
     <Compile Include="Asteroid.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="Ship.cs" />
+    <Compile Include="Projectile.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,16 +57,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\asteroid.png" />
-    <Content Include="Content\ship.png" />
-    <Content Include="Content\space.png" />
+    <Content Include="Content\Background\space.png" />
+    <Content Include="Content\Obstacles\asteroid.png" />
+    <Content Include="Content\Player\ship.png" />
+    <Content Include="Content\Projectiles\bullet.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
-    <None Include="Content\spaceFont.spritefont" />
-    <None Include="Content\timerFont.spritefont" />
+    <None Include="Content\Fonts\spaceFont.spritefont" />
+    <None Include="Content\Fonts\timerFont.spritefont" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

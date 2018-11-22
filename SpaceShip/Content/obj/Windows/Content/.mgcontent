@@ -4,13 +4,15 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Documents/C# Monogame/SpaceShip/SpaceShip/Content/asteroid.png</File>
-    <File>D:/Documents/C# Monogame/SpaceShip/SpaceShip/Content/ship.png</File>
-    <File>D:/Documents/C# Monogame/SpaceShip/SpaceShip/Content/space.png</File>
-    <File>D:/Documents/C# Monogame/SpaceShip/SpaceShip/Content/spaceFont.spritefont</File>
-    <File>D:/Documents/C# Monogame/SpaceShip/SpaceShip/Content/timerFont.spritefont</File>
+    <File>D:/Documents/C# Monogame/SpaceShip2.0/SpaceShip/SpaceShip/Content/Background/space.png</File>
+    <File>D:/Documents/C# Monogame/SpaceShip2.0/SpaceShip/SpaceShip/Content/Fonts/spaceFont.spritefont</File>
+    <File>D:/Documents/C# Monogame/SpaceShip2.0/SpaceShip/SpaceShip/Content/Fonts/timerFont.spritefont</File>
+    <File>D:/Documents/C# Monogame/SpaceShip2.0/SpaceShip/SpaceShip/Content/Obstacles/asteroid.png</File>
+    <File>D:/Documents/C# Monogame/SpaceShip2.0/SpaceShip/SpaceShip/Content/Player/ship.png</File>
+    <File>D:/Documents/C# Monogame/SpaceShip2.0/SpaceShip/SpaceShip/Content/Projectiles/bullet.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

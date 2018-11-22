@@ -26,12 +26,12 @@ namespace SpaceShip {
             if (timer <= 0) {
                 asteroids.Add(new Asteroid(nextSpeed));
                 timer = maxTime;
-                if (maxTime > 0.5)
-                    maxTime -= 0.1;
-                if (nextSpeed < 500)
-                    nextSpeed += 5;
-                else
-                    nextSpeed += 10;
+                //if (maxTime > 0.5)
+                //    maxTime -= 0.1;
+                //if (nextSpeed < 500)
+                //    nextSpeed += 5;
+                //else
+                //    nextSpeed += 10;
             }
         }
     }

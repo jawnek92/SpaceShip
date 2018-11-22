@@ -15,13 +15,16 @@ namespace SpaceShip
         Texture2D shipSprite;
         Texture2D asteroidSprite;
         Texture2D spaceSprite;
+        Texture2D projectileSprite;
 
         SpriteFont gameFont;
         SpriteFont timerFont;
 
-        Ship player = new Ship(Ship.defaultPosition);
+        Player player = new Player(Player.defaultPosition);
         //Asteroid asteroid = new Asteroid(200, 50);
         Controller gameController = new Controller();
+
+        KeyboardState oldState = Keyboard.GetState();
 
         public Game1()
         {
@@ -43,12 +46,13 @@ namespace SpaceShip
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            shipSprite = Content.Load<Texture2D>("ship");
-            spaceSprite = Content.Load<Texture2D>("space");
-            asteroidSprite = Content.Load<Texture2D>("asteroid");
+            shipSprite = Content.Load<Texture2D>("Player/ship");
+            spaceSprite = Content.Load<Texture2D>("Background/space");
+            asteroidSprite = Content.Load<Texture2D>("Obstacles/asteroid");
+            projectileSprite = Content.Load<Texture2D>("Projectiles/bullet");
 
-            gameFont = Content.Load<SpriteFont>("spaceFont");
-            timerFont = Content.Load<SpriteFont>("timerFont");
+            gameFont = Content.Load<SpriteFont>("Fonts/spaceFont");
+            timerFont = Content.Load<SpriteFont>("Fonts/timerFont");
 
 
             // TODO: use this.Content to load your game content here
@@ -66,25 +70,42 @@ namespace SpaceShip
 
             if (state.IsKeyDown(Keys.Escape))
                 Exit();
-            
-
-           
-            player.shipUpdate(gameTime, gameController);
-                //asteroid.asteroidUpdate(gameTime);
+                       
+            player.update(gameTime, gameController);
             gameController.controllerUpdate(gameTime);
 
-            for (int i = 0; i < gameController.asteroids.Count; i++) {
-                Asteroid a = gameController.asteroids[i];
-                a.asteroidUpdate(gameTime);
-                //int sumVertical = a.getRadius() + 50;
-                int sumHorizontal = a.getRadius() + 34;
-                System.Console.WriteLine("Vector Distance: " + Vector2.Distance(a.GetVector, player.GetVector) + "; horizontalSum: " + sumHorizontal);
-                System.Console.WriteLine("Vectors Cords - player : (" + player.GetVector.X + ", " + player.GetVector.Y + "); asteroida: (" + a.GetVector.X + ", " + a.GetVector.Y + ")");
-                if (Vector2.Distance(a.GetVector, player.GetVector) < sumHorizontal) {  //(int)(Vector2.Distance(a.GetVector(), player.GetVector())            Vector2.Distance(player.GetCord(Ship.Cords.B), a.GetVector()) 
+            if (state.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space)) {
+                Projectile.projectiles.Add(new Projectile(player.Position));
+                //System.Console.WriteLine("Projectiles count : " + Projectile.projectiles.Count);
+            }
+            oldState = state;
+
+            for (int i = 0; i < gameController.asteroids.Count; i++) { 
+                Asteroid asteroid = gameController.asteroids[i];
+                asteroid.asteroidUpdate(gameTime);
+                int sumHorizontalBetweenPlayerAndAsteroid = asteroid.Radius + 34;
+                //System.Console.WriteLine("Vector Distance: " + Vector2.Distance(a.GetVector, player.Position) + "; horizontalSum: " + sumHorizontal);
+                //System.Console.WriteLine("Vectors Cords - player : (" + player.Position.X + ", " + player.Position.Y + "); asteroida: (" + a.GetVector.X + ", " + a.GetVector.Y + ")");
+                if (Vector2.Distance(asteroid.Position, player.Position) < sumHorizontalBetweenPlayerAndAsteroid) {  //(int)(Vector2.Distance(a.GetVector(), player.GetVector())            Vector2.Distance(player.GetCord(Ship.Cords.B), a.GetVector()) 
                     gameController.inGame = false;
-                    player.SetVector(Ship.defaultPosition);
+                    player.SetPosition(Player.defaultPosition);
                     i = gameController.asteroids.Count;
                     gameController.asteroids.Clear();
+                }
+
+                for (int j = 0; j < Projectile.projectiles.Count; j++) {
+                    Projectile projectile = Projectile.projectiles[j];
+                    //System.Console.WriteLine("projectile X : " + projectile.Position.X + ", Y: " + projectile.Position.Y);
+                    int sumBetweenProjectileAndAsteroid = asteroid.Radius + projectile.Radius;
+                    if (Vector2.Distance(asteroid.Position, projectile.Position) < sumBetweenProjectileAndAsteroid) {
+                        gameController.asteroids.Remove(asteroid);
+                        Projectile.projectiles.Remove(projectile);
+                    }
+                    projectile.update(gameTime);
+                    //System.Console.WriteLine("projectile X : " + projectile.Position.X + ", Y: " + projectile.Position.Y);
+
+                    //int sumVertical = a.getRadius() + 50;
+
                 }
             }
             base.Update(gameTime);
@@ -100,13 +121,15 @@ namespace SpaceShip
                 string menuMsg = "Press 'Enter' to start the game.";
                 Vector2 stringPosition = gameFont.MeasureString(menuMsg);
                 spriteBatch.DrawString(gameFont, menuMsg, new Vector2(stringPosition.X/2, stringPosition.Y), Color.White);
-            } else { 
-                    foreach(Asteroid a in gameController.asteroids)
-                    {
-                        spriteBatch.Draw(asteroidSprite, a.GetVector, Color.White);
+            } else {
+                foreach (Asteroid a in gameController.asteroids) {
+                    spriteBatch.Draw(asteroidSprite, a.Position, Color.White);
+                }
+                foreach(Projectile p in Projectile.projectiles) {
+                    spriteBatch.Draw(projectileSprite, p.Position, Color.White);
                 }
             }
-            spriteBatch.Draw(shipSprite, player.GetVector, Color.Green);
+            spriteBatch.Draw(shipSprite, player.Position, Color.Green);
             spriteBatch.End();
             
             base.Draw(gameTime);
